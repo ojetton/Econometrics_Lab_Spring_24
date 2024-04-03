@@ -4,9 +4,9 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Class GitHub Page](https://github.com/edrubin/EC607S24)
 
-\textbf{Lab} Friday 12:00pm–12:50pm, 330 Condon
+**Lab** Friday 12:00pm–12:50pm, 330 Condon
 
-\textbf{Office Hours} Tuesday and Wednesday: 12:00 - 1:00 PM, PLC 417
+**Office Hours** Tuesday and Wednesday: 12:00 - 1:00 PM, PLC 417
 
 
 ## Week 1: R Markdown, Functions, and Loops
