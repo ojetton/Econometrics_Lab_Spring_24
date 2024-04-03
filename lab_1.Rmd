@@ -1,0 +1,271 @@
+---
+title: "Week 1 Lab"
+date: "2024-04-05"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+## What is R Markdown?
+
+R Markdown is a format for writing reports and presentations that include R Code. It can create files in html, pdf, Word, slideshows, and other formats. 
+
+
+## Writing in R Markdown
+
+Unlike R script files, writing on a plain line in R Markdown will appear as wording in the final file. Here are a few options for word stylization:
+
+* *Italics*: Single asterisks on either side of the word/phrase: $*\text{word}*$
+
+* **Bold**: Double asterisks on either side of the word/phrase: $**\text{word}**$
+
+* Headings: Start a line with a hashtag/pound sign. More hashtags = smaller heading: $\#\text{heading}$
+
+# Heading
+
+## Heading
+
+### Heading
+
+#### Heading
+
+* Lists: Single asterisk, number, or other sign: $*, +, -, 1$
+
+
+## LaTeX in R Markdown
+
+If you want even more options for writing, such as writing math equations, in R Markdown, it uses \LaTeX 
+
+Many of the writing formatting operations can be performed with LaTeX
+
+\begin{itemize}
+  \item Such as writing lists
+  \item Or \emph{italicizing} which can be done with $\backslash \text{emph{word}} ~ \Rightarrow $ \emph{word}
+  \item Or \textbf{bolding} which can be done with $\backslash \text{textbf{word}} ~ \Rightarrow $ \textbf{word}
+\end{itemize}
+
+Most importantly, it can be used for writing math equations. In line with \textdollar e = m c ^ 2 \textdollar $\Rightarrow e = mc^2$ 
+
+Or as its own centered body of text: \textdollar $\backslash$sum_$\text{{t=0}}$^$\backslash$infty $\backslash$beta^t u(c_t) \textdollar $\Rightarrow$
+$$\sum_{t=0}^\infty \beta^t u(c_t)$$
+
+Greek letters can also be displayed through LaTeX's math mode. Lowercase first letter yields lowercase greek letter, uppercase first letter yields upper case greek letter:  $\backslash$omega $\Rightarrow \omega$, $\backslash$Omega $\Rightarrow \Omega$ 
+
+
+
+## Coding Terminology
+
+When creating **chunks** of code, you have the following options, which are set to **T** by default.
+
+* eval: (T/F) run/evaluate the code and display results
+
+* echo: (T/F) display code and results (runs code either way)
+
+* warning: (T/F) display warnings
+
+* error: (T/F) display errors
+
+
+## Knitting
+
+The **Knit** button generates the document (in the selected format) with the writing and embedded code chunks and their results. 
+
+Knitting to html is automatically built into R Markdown. To knit to pdf, you will need to download \LaTeX onto your computer (which is a large file and takes time)
+
+
+## Example
+ 
+Let's do an example file and practice:
+
+* formatting the file
+
+* creating code chunks
+
+* running code in R Markdown
+
+* displaying plots
+
+* knitting
+
+
+```{r title}
+# Load car data
+car_data = cars
+
+# And ggplot2
+library(ggplot2)
+
+```
+
+```{r eval plot}
+
+ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point()
+
+```
+
+Now plot with eval = F
+
+```{r dont eval plot, eval = F}
+
+ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point()
+
+```
+
+No plot?
+
+
+## Review Functions
+
+We will briefly review creating functions in R, since they will come in handy during this term, and some problem sets will specifically ask for functions that perform a certain task.
+
+#### Basics:
+
+```{r function 1}
+
+# function name = function(input) {
+#                 operations on input = output 
+#                 return(output)
+# }
+
+```
+
+#### Example:
+
+Create a function of this function:
+
+$$f(x) = \frac{x - 5}{4}$$
+```{r function 2}
+
+# Create the function
+f_x = function(x) {
+  
+  ans = (1/4)*(x - 5)
+  
+  return(ans)
+}
+
+
+# Try it on x = 10
+f_x(10)
+```
+
+Now suppose we want this new function:
+
+$$g(x,y) = f(x) - 3y$$
+
+You could do this by plugging in $f(x) = \frac{x - 5}{4}$ is, OR a faster way is to put our previous function $f\_x$ into this new function!
+
+```{r function 3}
+
+# Create function
+g_xy = function(x, y) { # note: two inputs
+  
+  ans = f_x(x) - 3*y
+  
+  return(ans)
+}
+
+# Try with x = 10, y = 2
+g_xy(10, 2)
+```
+
+
+## For Loops
+
+We briefly discussed *for* loops last term, but didn't use them. You will use them this term, so let's review.
+
+#### Basics
+
+```{r for 1}
+
+# for (i in start:end) {
+#   operation performed on each value of i
+# }
+
+```
+
+That's rather abstract so it's easier to start with an example. Apply our function $f\_x$ to every integer from 1 to 20 and print the answer.
+
+```{r for 2}
+
+for (i in 1:20){
+  print(f_x(i))
+}
+
+```
+
+#### Handy functions for *for* loops
+
+We typically don't want to just perform operations on integers. We can get any linear sequence of numbers we want using the $seq()$ function
+
+Suppose we want every hundredth place from 0 to 1: 0, 0.01, 0.02, ... , 0.98, 0.99, 1
+
+```{r seq}
+
+# Basically
+##  seq(from = start, to = end, by = step)
+
+seq(from = 0, to = 1, by = 0.01)
+
+```
+
+We also often want a vector to put our output into. The function $rep(value, n)$ repeats whatever value you give it, n times
+
+```{r rep}
+
+# "empty" vector
+rep(NA, 10)
+
+```
+
+In a *for* loop, we can find the $i^{\text{th}}$ value of a vector by using square brackets
+
+For example: apply $f\_x$ to each value in the sequence above using a *for* loop, and store the answers into a new vector
+
+```{r for 3}
+
+seq_1 = seq(from = 0, to = 1, by = 0.01)
+
+seq_2 = rep(NA, 101)
+
+for (i in 1:101){
+  seq_2[i] = f_x(seq_1[i])
+}
+
+seq_2
+```
+
+
+
+#### Combine functions and for loops
+
+Let's create a function that creates the first N numbers of the Fibonacci sequence, defined as:
+
+$$F_1 = 0, ~ F_2 = 1, ~ F_{n} = F_{n-1} + F_{n-2}$$
+
+```{r fibonacci}
+
+# function
+fibonacci = function(N) {
+  
+  data = c(0, 1, rep(NA, N - 2))
+  
+  for (i in 3:N) {
+    data[i] = data[i - 1] + data[i - 2]
+  }
+  
+  return(data)
+}
+
+# suppose we want the first 20 values (including 0 and 1)
+fibonacci(20)
+
+```
+
+
