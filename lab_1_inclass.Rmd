@@ -1,0 +1,149 @@
+---
+title: "Lab 1"
+author: "Owen Jetton"
+date: "2024-04-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Writing not code
+
+2 + 2
+
+*italics*
+
+**bold**
+
+# Heading 1
+
+## Heading 2 
+
+In LaTeX
+
+italicize: \emph{word that is italicized}
+
+bold: \textbf{text in bold}
+
+I have a sentence and I want to have a math equation in this sentence. $e = mc^2$
+
+$$\sum_{t=0}^\infty \beta^t u(c_t)$$
+
+Greek letters: $\Omega \omega$
+
+```{r Chunk Name, echo = F, error = F}
+
+a = 4
+
+```
+
+Command + Option + i => drop a chunk
+
+
+
+# Example
+
+```{r Cars Data}
+
+# get data
+cars_data = cars
+
+# And ggplot2
+library(ggplot2)
+
+ggplot(cars_data, aes(x = speed, y = dist)) + 
+  geom_point()
+
+```
+
+
+## Functions
+
+```{r Functions}
+
+my_function = function(input){
+  output = input + 3
+  return(output)
+}
+
+my_function(4)
+
+
+```
+
+
+```{r fx function}
+
+f_x = function(x){
+  ans = (1/4)*(x - 5)
+  return(ans)
+}
+
+f_x(10)
+
+
+
+g_xy = function(x, y){
+  
+  nonsense = f_x(x) - 3*y
+  return(nonsense)
+}
+
+g_xy(x = 10, y = 2)
+
+```
+
+
+## For loops
+
+```{r for loops 1}
+
+for (i in 1:20) {
+  
+  print(f_x(i))
+}
+
+
+```
+
+```{r seq}
+
+seq(from = 0, to = 1, by = 0.01)
+
+rep(NA, 10)
+
+```
+
+```{r for loops 2}
+
+vec_1 = seq(from = 0, to = 1, by = 0.01)
+
+vec_2 = rep(NA, 101)
+
+for (i in 1:101){
+  vec_2[i] = f_x(vec_1[i])
+}
+
+vec_2
+```
+
+```{r fibonacci}
+
+fibonacci = function(N){
+  # empty data set where to store the values
+  data = c(0, 1, rep(NA, N-2))
+  
+  for (i in 3:N){
+    data[i] = data[i - 1] + data[i - 2]
+  }
+  
+  return(data)
+}
+
+fibonacci(20)
+```
+
+

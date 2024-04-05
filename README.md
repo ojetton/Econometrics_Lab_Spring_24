@@ -14,3 +14,8 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 #### [Lab 1 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1.pdf)
 
 [Lab 1 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1.Rmd)
+
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1_inclass.html)
+
+#### [Challenge 1](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/challenge_1.pdf)
+

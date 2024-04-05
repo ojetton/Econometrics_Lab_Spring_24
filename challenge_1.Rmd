@@ -1,0 +1,18 @@
+---
+title: "Week 1 R Challenge"
+date: "2024-04-05"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Challenge:
+
+Write a function that uses a Riemann Sum to correctly estimate $\pi$ to at least 5 correct decimals: $3.14159$
+
+Ideally, you are combining your knowledge of algebra, geometry, and R loops to estimate $\pi$.
+
+You may *not* use any packages outside of base R, or any trigonometric functions or other pre-existing R functions that have $\pi$ *baked* into them. 
+
