@@ -1,0 +1,313 @@
+---
+title: "Lab 2: Matrices and Cleaning Data"
+date: "2024-04-12"
+output: pdf_document
+---
+
+
+# Matrices
+
+**How do we handle matrices in R?**
+
+#### Vectors
+
+Let's start with vectors (which are matrices where one of the dimensions is 1)
+
+Suppose I want the following vectors:
+
+$$a = \begin{pmatrix} 1 \\ 5 \\ 8\end{pmatrix}, ~ b = \begin{pmatrix} 4 ~~ 9 ~~ 0 \end{pmatrix}, ~ b*a = ?$$
+
+
+```{r Vectors 1}
+
+# Use c() 
+
+a = c(1, 5, 8)
+
+b = c(4, 9, 0)
+
+
+# What if I multiply it?
+
+b*a # That does element wise (4*1  9*5  0*8)
+
+
+# For vector and matrix multiplication: %*%
+b%*%a 
+
+a%*%b
+
+
+
+```
+
+Uh oh! $b*a = a*b$? That's not true! What's going on? R thinks it's being smart
+
+* $\%*\%$ performs the *inner* product of any two vectors and will make them conform
+
+* If you want $a*b$ (the *outer* product of $a$ and $b$) use $outer(b,a)$ 
+
+* Basically: R will make your vectors conform. Which is usually nice, but **be careful!**
+
+
+#### Matrices
+
+How to write one, how to transpose, how to invert, multiply? 
+
+Suppose we want these matrices:
+
+$$X = \begin{pmatrix} 3 ~~ 1 ~~ 2 \\ 0 ~~ 1 ~~ 5 \\ 4 ~~ 0 ~~2 \end{pmatrix}, ~ Y = \begin{pmatrix} 9 ~~ 3 ~~ 0 \\ 4 ~~ 2 ~~ 3 \\ \end{pmatrix}$$
+
+The $matrix()$ function works like this: **matrix(c(list numbers), nrow = ?, ncol = ?)**
+
+* **c(list numbers)**: list all the numbers in your matrix starting from the top right and moving *down*
+
+    * For X: **c(3, 0, 4, 1, 1, 0, 2, 5, 2)**
+    
+* **nrow =** number of rows: of the list given, how many rows should this matrix have?
+
+* **ncol =** number of columns: of the list, how many columns should this matrix have? (sufficient to only have 1 of **nrows** or **ncols**)
+
+
+```{r Matrices 1}
+
+# Write Matrices: matrix(c(numbers), nrow = number of rows, ncol = number of columns)
+X = matrix(c(3, 0, 4, 1, 1, 0, 2, 5, 2), ncol = 3)
+
+X
+
+
+Y = matrix(c(9, 4, 3, 2, 0, 3), ncol = 3)
+
+Y
+
+```
+
+Matrix multiplication: just like with vectors: $\%*\%$
+
+$$\text{Try: } ~~ Y*X, ~~~ b*X, ~~~ X*a$$
+
+
+```{r Matrix 2}
+
+# Y*X (2 x 3)
+Y %*% X 
+
+# b*X (1 x 3)
+b %*% X
+
+# X*a (3 x 1)
+X %*% a
+
+```
+
+As you can see, it makes the vectors $a$ and $b$ conformable to the matrixes!
+
+
+More operations:
+
+* Transpose: $t(matrix)$
+
+* Invert: $inv(matrix)$
+
+* Determinant: $det(matrix)$
+
+* Eigenvalues and vectors: $eigen(matrix)\$values,~ eigen(matrix)\$vectors$
+
+* Diagonal: $diag(matrix)$
+
+```{r Matrix 3}
+
+# Transpose X
+X_T = t(X)
+X_T
+
+
+# Invert X and prove it's the inverse
+X_inv = solve(X)
+
+X_inv
+
+X %*% X_inv # not perfect since X_inv rounds to decimals
+
+
+# Determinant of X
+det_X = det(X)
+
+det_X
+
+
+# Eigenvalues and Vectors
+X_eig = eigen(X)
+
+X_eig$values
+X_eig$vectors
+
+
+# Give diagonal elements of X
+X_diag = diag(X)
+
+X_diag
+
+```
+
+
+Suppose I want to merge $X$ and $Y$ in these two ways:
+
+$$A =\begin{pmatrix} X \\ Y\end{pmatrix}, ~~~ B = \begin{pmatrix} X ~ Y' \end{pmatrix}$$
+
+We're going to use $rbind()$ (which stands for **row bind**) and $cbind()$ (**column bind**)
+
+```{r Matrix 4}
+
+# A is a row bind
+A = rbind(X, Y)
+A
+
+
+# B is a column bind
+B = cbind(X, t(Y))
+B
+
+```
+
+
+
+
+#### Data Frames and Matrices
+
+How to turn data table into matrix, and vice versa
+
+Turn the dataset $cars$, into a matrix
+
+```{r Matrix 5}
+
+# Get data
+data = cars
+
+# Turn into matrix
+cars_matrix = as.matrix(cars)
+
+
+# We can find the dimensions using dim()
+dim(cars_matrix)
+
+```
+
+Turn that matrix $A$ from earlier into a dataset
+
+```{r Matrix 6}
+
+A_data = as.data.frame(A)
+
+A_data
+
+```
+
+This data is pretty boring though. Let's make it look better with...
+
+
+# Data Cleaning
+
+We are going to learn how to clean and wrangle data with a package you're already familiar with: $dplyr$
+
+```{r data 1}
+
+# Load dplyr
+library(pacman)
+p_load(dplyr)
+
+
+```
+
+Suppose you are sent this dataset about schools in Oregon's three most populous cities: Portland, Eugene, and Salem. Download it and take a look:
+
+* Get the url by going to the Lab GitHub page => README => Week 2 => Muddy data to clean
+
+```{r Github Data, warning=F}
+
+# get data
+p_load(readr)
+
+urlfile = "https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/muddy_data"
+
+muddy_data = read_csv(url(urlfile))
+
+
+```
+
+The variables are:
+
+* **City**: What city the school is in
+
+* **Number**: Number of students
+
+* **GPA**: Average GPA at the school
+
+* **gender**: What portion of the school is male
+
+* **NEIGHBORHOOD**: Rough population estimate of the neighborhood
+
+* **Teachers**: The number of teachers
+
+
+Your boss wants to know the effect of the number of students per teacher on GPA (controlling for confounding variables) and wants to run this regression and WILL NOT change their code: 
+
+```{r boss reg}
+
+# reg = lm(data = school_data, formula = gpa ~ student_teacher_ratio + neighborhood_pop + percent_male + factor(city))
+
+```
+
+You are told the variables mean:
+
+* **school_data**: the dataset of schools with more than 100 students
+
+* **gpa**: Average GPA at the school (same as **GPA**)
+
+* **student_teacher_ratio**: Number of students / Number of teachers (how many students per teacher)
+
+* **neighborhood_pop**: Population for the neighborhood the school is in
+
+* **percent_male**: the *percent* of the school that is male
+
+* **factor(city)**: recall this creates the fixed effects variables for each city
+
+
+Let's use functions in the dplyr package to clean the data to our specification:
+
+```{r Clean data}
+
+# First, let's rename our variables:
+
+new = c("city", "students", "percent_male", "neighborhood_pop", "teachers", "gpa")
+
+school_data = muddy_data %>% 
+                rename_all(~new) %>%
+  
+            # Next, let's remove all rows that have NAs
+                na.omit() %>%
+  
+            # Filter so we only have schools with over 100 students
+                filter(students > 100) %>%
+  
+            # Make the percent_male into percent
+                mutate(percent_male = 100*percent_male) %>%
+  
+            # And now create student_teacher_ratio
+                mutate(student_teacher_ratio = students/teachers)
+
+```
+
+Now run your boss' code!
+
+```{r boss reg 2}
+
+reg = lm(data = school_data, formula = gpa ~ student_teacher_ratio + neighborhood_pop + percent_male + factor(city))
+
+summary(reg)
+
+```
+
+This means for every student added per teacher, the average GPA for the school decreases by **0.09**
+

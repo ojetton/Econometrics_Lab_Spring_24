@@ -19,3 +19,12 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 #### [Challenge 1](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/challenge_1.pdf)
 
+
+## Week 2: Matrices and Data Cleaning
+
+#### [Lab 2 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2.pdf)
+
+[Lab 2 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2.Rmd)
+
+#### [Muddy data to clean](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/muddy_data)
+
