@@ -108,7 +108,7 @@ More operations:
 
 * Transpose: $t(matrix)$
 
-* Invert: $inv(matrix)$
+* Invert: $solve(matrix)$
 
 * Determinant: $det(matrix)$
 
@@ -176,9 +176,12 @@ B
 
 #### Data Frames and Matrices
 
+
 How to turn data table into matrix, and vice versa
 
+
 Turn the dataset $cars$, into a matrix
+
 
 ```{r Matrix 5}
 
@@ -233,6 +236,7 @@ urlfile = "https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/
 
 muddy_data = read_csv(url(urlfile))
 
+summary(muddy_data)
 
 ```
 
@@ -253,9 +257,10 @@ The variables are:
 
 Your boss wants to know the effect of the number of students per teacher on GPA (controlling for confounding variables) and wants to run this regression and WILL NOT change their code: 
 
-```{r boss reg}
+```{r boss reg, eval = F}
 
-# reg = lm(data = school_data, formula = gpa ~ student_teacher_ratio + neighborhood_pop + percent_male + factor(city))
+reg = lm(data = school_data, 
+         formula = gpa ~ student_teacher_ratio + neighborhood_pop + percent_male + factor(city))
 
 ```
 
@@ -303,7 +308,8 @@ Now run your boss' code!
 
 ```{r boss reg 2}
 
-reg = lm(data = school_data, formula = gpa ~ student_teacher_ratio + neighborhood_pop + percent_male + factor(city))
+reg = lm(data = school_data, 
+         formula = gpa ~ student_teacher_ratio + neighborhood_pop + percent_male + factor(city))
 
 summary(reg)
 
