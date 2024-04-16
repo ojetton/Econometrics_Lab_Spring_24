@@ -1,0 +1,70 @@
+---
+title: "Week 1 R Challenge Answer"
+date: "2024-04-05"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Challenge:
+
+Write a function that uses a Riemann Sum to correctly estimate $\pi$ to at least 5 correct decimals: $3.14159$
+
+Ideally, you are combining your knowledge of algebra, geometry, and R loops to estimate $\pi$.
+
+You may *not* use any packages outside of base R, or any trigonometric functions or other pre-existing R functions that have $\pi$ *baked* into them. 
+
+## My Solution:
+
+We know that $x^2 + y^2 = 1$ forms a circle of radius $1$ and area $\pi$. 
+
+Estimate the area between $0$ and $1$ under the curve of $y = \sqrt{1 - x^2}$ using a Riemann Sum. Call this area $A$. Therefore we estimate $\pi$ as 
+
+$$\pi \approx 4 A$$
+
+
+
+```{r code}
+
+# Function for y = \sqrt{1 - x^2}
+quart_circ = function(x) {
+  
+  y = sqrt(1 - x^2)
+  
+  return(y)
+}
+
+
+# Riemann Sum Estimator
+riemann_sum = function(n) {
+  # n tells us the number of steps to take
+  
+  steps = seq(from = 0, to = 1, by = 1/n)
+  
+  area_data = rep(NA, n)
+  
+  for (i in 1:n) {
+    # what is y for a given x?
+    y = quart_circ(steps[i])
+    
+    # multiply to get area of rectangle, and save area
+    area_data[i] = y*(1/n)
+  }
+  
+  pi = 4*sum(area_data)
+  
+  return(pi)
+}
+
+
+
+riemann_sum(1000000)
+
+```
+
+
+
+
+

@@ -19,6 +19,8 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 #### [Challenge 1](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/challenge_1.pdf)
 
+#### [Challenge 1 Solution](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/challenge_1_ans.pdf)
+
 
 ## Week 2: Matrices and Data Cleaning
 
