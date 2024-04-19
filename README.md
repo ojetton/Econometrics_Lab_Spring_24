@@ -30,3 +30,13 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 #### [Muddy data to clean](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/muddy_data)
 
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2_inclass.html)
+
+
+## Week 3: Webscraping
+
+#### [Lab 3 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2.pdf)
+
+[Lab 3 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3.Rmd)
+
+
