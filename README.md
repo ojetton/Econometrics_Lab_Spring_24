@@ -39,4 +39,5 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Lab 3 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3.Rmd)
  
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3_inclass.html)
 
