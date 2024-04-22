@@ -11,7 +11,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 ## Week 1: R Markdown, Functions, and Loops
 
-#### [Lab 1 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1.pdf)
+### [Lab 1 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1.pdf)
 
 [Lab 1 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1.Rmd)
 
@@ -24,7 +24,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 ## Week 2: Matrices and Data Cleaning
 
-#### [Lab 2 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2.pdf)
+### [Lab 2 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2.pdf)
 
 [Lab 2 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2.Rmd)
 
@@ -35,7 +35,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 ## Week 3: Webscraping
 
-#### [Lab 3 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3.pdf)
+### [Lab 3 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3.pdf)
 
 [Lab 3 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3.Rmd)
  
@@ -43,6 +43,11 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 
 ## Week 4: Data Visualization
+
+
+### [Lab 4 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_4.pdf)
+
+[Lab 4 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_4.Rmd)
 
 #### [Time Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/time_data)
 
