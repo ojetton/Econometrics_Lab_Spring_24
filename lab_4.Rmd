@@ -1,0 +1,254 @@
+---
+title: "Lab 4: Data Visualization"
+date: "2024-04-26"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Why Visualize Data?
+
+In an age of big data, it can be difficult to accurately convey a narrative through presenting plain numbers in tables
+
+On the flip side, there are **BAD** ways to visualize that data
+
+Let's create a list of axioms or goals that we want to stick to when creating data visualizations that help us convey what we want to be conveyed. Our goals:
+
+* Be clear and concise (avoid over-complicating the figure)
+
+* Accurately represent the data (use the *right* type of graph)
+
+* Be purposeful (avoid doing things because it *looks neat*)
+
+* Others?
+
+
+# Types of Visualizations
+
+Here are a list of different types of graphs often used to express data (these are hyperlinks):
+
+* Most common: [Line](https://en.wikipedia.org/wiki/Line_chart), [Scatter](https://en.wikipedia.org/wiki/Scatter_plot), [Bar](https://en.wikipedia.org/wiki/Bar_chart)
+
+* Less common: [Density / Histogram](https://en.wikipedia.org/wiki/Histogram), [Box](https://en.wikipedia.org/wiki/Box_plot), [Pie](https://en.wikipedia.org/wiki/Pie_chart), [Sankey](https://sankeymatic.com/)
+
+* Rare: [Waterfall](https://en.wikipedia.org/wiki/Waterfall_chart), [Radar](https://en.wikipedia.org/wiki/Radar_chart), [Pareto](https://en.wikipedia.org/wiki/Pareto_chart) (these are mostly stylistic variations or combinations of the above graphs, and are often pointless)
+
+
+
+### *Which do I use?*
+
+* Non-answer: It depends on the data!
+
+Helpful *graphic:*
+
+![image1](/Users/owenjetton/Documents/PhD Year 3/Metrics_Spring/data_vis_vis.png)
+
+
+\break
+
+
+# GGPLOT2
+
+R's best friend for data visualization is the package *ggplot2*
+
+```{r ggplot2 load}
+
+library(pacman)
+p_load(ggplot2)
+
+```
+
+
+### Line Chart
+
+In general, the code for line charts will look like:
+
+```{r ggplot template, eval=F}
+
+ggplot(dataset, aes(x = x_variable, y = y_variable)) +
+  geom_line() +
+  labs(x = "x variable label", y = "y variable label", title = "Graph title") +
+  theme()
+
+```
+
+
+
+
+Let's graph the unemployment data over time, using 
+
+```{r unemployment}
+
+# Load package and data
+p_load(readr)
+
+url_time = "https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/time_data"
+
+time_data = read_csv(url(url_time))
+
+
+# Graph:
+ggplot(time_data, aes(x = date, y = UNRATE)) +
+  geom_line() +
+  labs(x = "Date", y = "Unemployment Rate (%)", title = "US Unemployment Rate Over Time") +
+  theme_bw()
+
+```
+
+There are a lot of options we have for adjusting this visualization. Suppose we want:
+
+* The y-axis to span from 0 to 15
+
+* The line to be dashed instead of solid
+
+* The line to be blue
+
+* Try theme_dark()
+
+```{r un plot 2}
+
+# Graph:
+ggplot(time_data, aes(x = date, y = UNRATE)) +
+  
+  # Changes to the line are within the "geom_line" function
+  geom_line(linetype = "dashed",
+            color = "blue") +
+  labs(x = "Date", y = "Unemployment Rate (%)", title = "US Unemployment Rate Over Time") +
+  
+  # Change the y-limits
+  ylim(0,15) + 
+  
+  # Try a new theme!
+  theme_dark()
+
+```
+
+Is this a *better* data visualization? Admittedly, no... 
+
+### Multiple Lines
+
+Let's graph the unemployment rate (in percent) and the inflation rate (in percent)
+
+```{r multiple lines}
+
+# Plainly:
+ggplot(time_data, aes(x = date)) +
+  geom_line(aes(y = UNRATE)) +
+  geom_line(aes(y = INF))
+
+
+```
+
+Let's add some detail:
+
+```{r multiple lines 2}
+
+ggplot(time_data, aes(x = date)) + # SAME x variable
+  
+  # Separate "geom_line" for each variable
+  geom_line(aes(y = UNRATE, color = "blue")) +
+  geom_line(aes(y = INF, color = "red")) + # COLOR within aes()
+  
+  labs(title = "Unemployment and the Inflation Rates",
+       x = "Date", y = "Percent") +
+  
+  # Legend:
+  scale_color_identity(
+      name = "",
+      guide = "legend",
+      labels = c("Unemployment Rate", "Inflation Rate")) +
+  theme_bw() +
+  
+  # Position of legend
+  theme(legend.position = "bottom")
+
+```
+
+Notice:
+
+* the colors are listed *within* the aes() function
+
+* scale_color_identity() gives details in the legend. name = "" yields no name, as it's unnecessary here
+
+* theme(legend.position = "bottom") is *after* theme_bw(), doing it the other way around won't work
+
+
+
+
+### Scatter
+
+Let's graph the unemployment rate *against* the inflation rate (the Phillips Curve)
+
+```{r scatter}
+
+# geom_point()
+ggplot(time_data, aes(x = UNRATE, y = INF)) +
+  geom_point()
+
+```
+
+Problems start to arise when there are three variables. One common way to introduce a third variable is with *color* or *size*. Suppose we want to show what the effective federal funds rate was in these data points:
+
+```{r color and size}
+
+# Color
+ggplot(time_data, aes(x = UNRATE, y = INF)) +
+  geom_point(aes(color = FEDFUNDS))
+
+# Size
+ggplot(time_data, aes(x = UNRATE, y = INF)) +
+  geom_point(aes(size = FEDFUNDS))
+
+```
+
+
+
+
+### Bar Graph
+
+Grab the **space_data** from the GitHub page
+
+```{r bar}
+
+# planets
+url_space = "https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/space_data"
+
+space_data = read_csv(url(url_space))
+
+ggplot(space_data, aes(x = Body, y = Volume)) +
+  geom_bar(stat = "identity")
+
+
+```
+
+Yikes... Let's clean this up. And
+
+```{r bar 2}
+
+
+ggplot(space_data, aes(x = reorder(Body,Volume), y = log(Volume))) +
+  # Color for the type of celestial body
+  geom_bar(aes(color = Type), stat = "identity") + 
+    # replace "color" with "fill" for different look
+  coord_flip() +
+  labs(x = "Celestial Body", y = "Log of Volume in Billions of Cubic Kilometers") +
+  theme_minimal()
+
+```
+
+### Pie Chart
+
+```{r pie}
+
+ggplot(space_data, aes(x="", y = log(Volume), fill=Type)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y") +
+  theme_void()
+
+
+```
+
+
+
