@@ -2,6 +2,7 @@
 library(pacman)
 p_load(dplyr, tidyquant)
 
+
 un_data = tq_get("UNRATE", get = "economic.data", from = "1948-01-01")
 
 summary(un_data)
@@ -12,7 +13,7 @@ summary(un_data)
 # fredr
 p_load(fredr, ggplot2)
 
-fredr_set_key("dc51717c249f72d5abdc1cc19afe0e8a")
+fredr_set_key("X")
 
 # Download the UNRATE again
 un_data_2 = fredr(series_id = "UNRATE")

@@ -41,3 +41,9 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
  
 #### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3_inclass.html)
 
+
+## Week 4: Data Visualization
+
+#### [Time Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/time_data)
+
+#### [Space Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/space_data)
