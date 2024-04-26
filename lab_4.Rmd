@@ -43,7 +43,7 @@ Here are a list of different types of graphs often used to express data (these a
 
 Helpful *graphic:*
 
-![image1](/Users/owenjetton/Documents/PhD Year 3/Metrics_Spring/data_vis_vis.png)
+![Helpful Graphic](/Users/owenjetton/Documents/PhD Year 3/Metrics_Spring/data_vis_vis.png)
 
 
 \break
@@ -61,20 +61,18 @@ p_load(ggplot2)
 ```
 
 
-### Line Chart
-
 In general, the code for line charts will look like:
 
 ```{r ggplot template, eval=F}
 
 ggplot(dataset, aes(x = x_variable, y = y_variable)) +
-  geom_line() +
+  geom_TYPE() +
   labs(x = "x variable label", y = "y variable label", title = "Graph title") +
   theme()
 
 ```
 
-
+### Line Chart
 
 
 Let's graph the unemployment data over time, using 
@@ -250,5 +248,7 @@ ggplot(space_data, aes(x="", y = log(Volume), fill=Type)) +
 
 ```
 
+
+### Multiple Graphs 
 
 
