@@ -8,6 +8,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 **Office Hours** Tuesday and Wednesday: 12:00 - 1:00 PM, PLC 417
 
+**Teach Yourself the Tidyverse:** [Tidyverse Koans by Colleen O'Briant](https://github.com/cobriant/tidyverse_koans)
 
 ## Week 1: R Markdown, Functions, and Loops
 
