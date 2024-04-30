@@ -52,3 +52,12 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 #### [Time Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/time_data)
 
 #### [Space Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/space_data)
+
+
+
+## Week 5: Random Numbers and Simulations
+
+### [Lab 5 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5.pdf)
+
+[Lab 5 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5.Rmd)
+
