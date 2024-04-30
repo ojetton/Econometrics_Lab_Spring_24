@@ -8,6 +8,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 **Office Hours** Tuesday and Wednesday: 12:00 - 1:00 PM, PLC 417
 
+**Teach Yourself the Tidyverse:** [Tidyverse Koans by Colleen O'Briant](https://github.com/cobriant/tidyverse_koans)
 
 ## Week 1: R Markdown, Functions, and Loops
 
@@ -53,11 +54,5 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 #### [Space Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/space_data)
 
-
-
-## Week 5: Random Numbers and Simulations
-
-### [Lab 5 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5.pdf)
-
-[Lab 5 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5.Rmd)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_4_inclass.html)
 
