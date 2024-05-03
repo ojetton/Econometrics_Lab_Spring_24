@@ -4,9 +4,7 @@ date: "2024-05-03"
 output: pdf_document
 ---
 
-```{r setup, echo=FALSE}
-knitr::opts_chunk$set(cache =TRUE)
-```
+
 
 # Simulations
 
@@ -106,7 +104,7 @@ We already saw 1 way to implement the *tibble* function to generate random data.
 
 * $X_i = N(10, 2)$
 
-* $Z_i = U(-3,3) + 0.1*X_i$
+* $Z_i = U(-3,3) - 0.2*X_i$
 
 * $\varepsilon_i = N(0,1)$
 
@@ -124,7 +122,7 @@ data_gen = function(N, alpha, beta, delta) {
   data = tibble(
     ID = 1:N,
     X = rnorm(N, mean = 10, sd = 2),
-    Z = runif(N, min = -3, max = 3) + 0.1*X,
+    Z = runif(N, min = -3, max = 3) - 0.2*X,
     e = rnorm(N, mean = 0, sd = 1),
     
     # create Y as a function of other variables
@@ -254,21 +252,113 @@ results_ovb = bind_rows(map(1:iter, reg_sim_2))
 # Plot
 ggplot() +
   # Full reg estimates
-  geom_density(aes(results_full$estimate), fill = "red", alpha = 0.5) + 
+  geom_density(aes(results_full$estimate, fill = "Full Model"), alpha = 0.5) + 
   
   # OVB estimates
-  geom_density(aes(results_ovb$estimate), fill = "blue", alpha = 0.5) +
+  geom_density(aes(results_ovb$estimate, fill = "Omitted Variable"), alpha = 0.5) +
   
   # true Beta = 0.5
   geom_vline(xintercept = 0.5) +
   
-  labs(x = "Estimate of Beta")
+  # Label
+  labs(x = "Estimate of Beta") + 
+  
+  # Fill colors
+  scale_fill_manual(name = "", values = c("red", "green")) +
+  
+  # Legend position
+  theme(legend.position = "bottom")
 
 ```
 
 
 You can estimate the mean of the biased estimator:
 
-$$E(b^{OVB}) = \beta + \delta \frac{cov(X,Z)}{var(X)} = 0.5 + 2 \frac{0.4}{4} = 0.7$$
+$$E(b^{OVB}) = \beta + \delta \frac{cov(X,Z)}{var(X)} = 0.5 + 2 \frac{-0.8}{4} = 0.1$$
 
+
+### T-Stats OVB Simulation
+
+Run the simulation again, except this time grab the t-stat on the coefficient on $X$
+
+**First** recreate the simulation function, as *1 function*
+
+```{r t stat sim}
+
+# Full Model Regression Simulation
+reg_t_sim = function(iter){
+  
+  # get data 
+  data_i = data_gen(N = 1000, alpha = 4, beta = 0.5, delta = 2)
+  
+  # regressions
+  reg_full = feols(data_i, Y ~ X + Z) # full regression
+  reg_ovb = feols(data_i, Y ~ X)  # OVB regression
+  
+  # Clean a bit
+  bind_rows(tidy(reg_full),tidy(reg_ovb)) %>% 
+        filter(term == "X") %>%
+      # t-stat is the 4th term
+        select(4) %>%
+      # name whether estimate came from full or ovb regression
+        mutate(OVB = c("No", "Yes"))
+}
+
+
+
+```
+
+
+**Second:** iterate this 1000 times
+
+```{r t sim 2}
+
+# 1000 periods
+iter = 1000
+
+# Run Simulation
+results_t_sim = bind_rows(map(1:iter, reg_t_sim))
+
+
+```
+
+
+**Third:** Graph!
+
+```{r t sim graph} 
+
+ggplot(results_t_sim) +
+  geom_density(aes(statistic, fill = OVB),
+               stat = "density", position = "identity", alpha = 0.5)
+
+```
+
+**Fourth:** (optional) make it look nice :)
+
+* Let's make the full model density red, the OVB density green
+
+* Shade in the area where we fail to reject the null hypothesis $H_0: \beta = 0$
+
+```{r t sim 4}
+
+ggplot(results_t_sim) +
+  
+  # Same as before
+  geom_density(aes(statistic, fill = OVB),
+               stat = "density", position = "identity", alpha = 0.5) +
+  
+  # Change colors
+  scale_fill_manual(name = "Omitted Variable?", values = c("red", "green")) +
+  
+  # Shade region (basically a rectangle)
+  annotate("rect", xmin = -1.96, xmax = 1.96, ymin = 0, ymax = 0.4, 
+           alpha = .5) +
+  
+  # Labels
+  labs(x = "t-statistic") +
+  
+  theme(legend.position = "bottom")
+
+
+```
 
