@@ -354,6 +354,10 @@ ggplot(results_t_sim) +
   annotate("rect", xmin = -1.96, xmax = 1.96, ymin = 0, ymax = 0.4, 
            alpha = .5) +
   
+  # Name "fail to reject" region.
+  annotate("text", x=-2, y=0.4, hjust=0, vjust=-.25, size=3, label = "Fail to Reject") +
+    # hjust and vjust adjust the text's relative position to the coordinates
+  
   # Labels
   labs(x = "t-statistic") +
   
