@@ -68,3 +68,8 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 ## Week 6: Refining our Simulation Skills
 
+### [Lab 6 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_6.pdf)
+
+[Lab 5 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_6.Rmd)
+
+
