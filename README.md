@@ -77,3 +77,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 [Lab 6 RmD PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_6_solutions.RmD)
 
 ## Week 7: Introduction to Machine Learning in R
+
+### [Lab 7 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7.pdf)
+
+[Lab 7 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7.Rmd)
