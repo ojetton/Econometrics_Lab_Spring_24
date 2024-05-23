@@ -83,3 +83,16 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 [Lab 7 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7.Rmd)
 
 #### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7_inclass.html)
+
+
+
+## Week 8: Tables in R
+
+### [Lab 8 HTML](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8.html) (Recommended version)
+
+### [Lab 8 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8.pdf)
+
+[Lab 8 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8.Rmd)
+
+
+

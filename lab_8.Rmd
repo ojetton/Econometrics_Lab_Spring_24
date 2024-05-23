@@ -1,0 +1,262 @@
+---
+title: 'Lab 8: Tables in R'
+date: "2024-05-24"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+We have talked previously about summarizing data into aesthetic visuals, or graphs. But sometimes, what is important cannot be transformed into a pleasing picture, and requires a *table.*
+
+Today we will discuss how to create tables that succinctly convey the desired information. 
+
+# Tables
+
+We will focus on the following types of tables today:
+
+1. Summary tables: show summary statistics of data
+
+2. Regression tables: report the results of one or multiple regressions
+
+
+## Summary Tables
+
+### Frequency Statistics
+
+```{r data}
+
+# Use the fivethirtyeight package
+library(pacman)
+p_load(fivethirtyeight, tidyverse) # tidyverse for cleaning
+
+# Data on Congress members from the 113th congress (2013 - 2015)
+age_data = congress_age %>% filter(congress == 113)
+
+table(age_data$party, age_data$chamber)
+
+```
+
+This is nice! But it can look better. Let's make a table reporting the average age for each party within each chamber of Congress.
+
+```{r age table}
+# new package: gt
+p_load(gt)
+
+age_table = age_data %>%
+  group_by(chamber, party) %>%
+  summarize(average_age = mean(age)) %>%
+  pivot_wider(
+    names_from = chamber,
+    values_from = average_age
+  )
+
+age_table
+
+# make a gt object
+age_table = age_table %>% gt()
+
+age_table
+
+```
+
+Much better! We can make more changes:
+
+* Add a title
+
+* Capitalize the first letter of each word
+
+* Write out the full name of each party (D $\rightarrow$ Democrat, etc.)
+
+* Change the number of decimals to 2 for each entry
+
+
+```{r age table 2}
+
+# from the gt packages
+age_table %>%
+  
+  # title
+  tab_header( title = "Average Age of Congress Members by Party and Chamber",
+    subtitle = "In the 133th Congress") %>%
+  
+  # capitalize first word
+  cols_label(party = "Party", house = "House", senate = "Senate") %>%
+  
+  # full party names
+  text_case_match("D" ~ "Democrat", "R" ~ "Republican", "I" ~ "Independent") %>%
+  
+  # decimals
+  fmt_number(decimals = 2)
+  
+  
+```
+
+
+
+## Regression Tables
+
+One of the most common types of tables you'll have in presentations, reports, or research papers are those reporting the results of a regression (or multiple regressions). 
+
+For this example, we will use the `candy_rankings` dataset also from the `fivethirtyeight` package. It contains survey data from over 250,000 random match-ups between candies, the percent that each candy "won," and information on each candy (including if it contains chocolate, comes in a bar form, is fruity, etc.)
+
+Suppose we want to know if having chocolate or peanuts/almonds makes a candy more likely to be chosen, or if the combination of chocolate and peanuts is more important. We can do this with two regressions:
+
+$$winpercent \sim chocolate + peanutyalmondy$$
+
+$$winpercent \sim chocolate + peanutyalmondy + chocolate \times peanutyalmondy$$
+
+```{r candy regs}
+candy = candy_rankings
+
+reg_1 = lm(data = candy, formula = winpercent ~ chocolate + peanutyalmondy)
+
+reg_2 = lm(data = candy, 
+           formula = winpercent ~ chocolate + peanutyalmondy + chocolate:peanutyalmondy)
+
+
+```
+
+
+#### tab_model() function
+
+This produces an HTML output, so it won't look pretty if you knit to a PDF. However, it looks good when using it in an R script file or knitting to HTML.
+
+```{r tabmodel}
+# From package: sjPlot
+p_load(sjPlot)
+
+# Basic table
+tab_model(reg_1, reg_2)
+
+```
+
+
+Multiple adjustments can be made
+
+* show.se = (TRUE / FALSE, whether to show standard errors of estimates)
+
+* show.stat = (TRUE / FALSE, whether to show t-statistic)
+
+* show.ci = (TRUE / FALSE, whether to show confidence interval)
+
+* show.p = (TRUE / FALSE, whether to show p-value)
+
+* pred.labels = c("list names of predictor variable(s)")
+
+* dv.labels = c("list names of *dependent* variable(s)")
+
+* string.pred = "Name for *Predictors* column"
+
+* string.ci = "Name for *CI* column"
+
+* string.p = "Name for *p* column"
+
+
+
+Let's use some of these options to make our table prettier
+
+1. Show estimates, standard errors, and p-value
+
+2. Rename variables to "Chocolate," "Nuts," and "Chocolate and Nuts." Also change the dependent variable to "Win Percent"
+
+3. Rename columns appropriately
+
+```{r tabmodel 2}
+
+tab_model(reg_1, reg_2,
+        # automatically reports estimate, CI, p)
+          show.ci = F,
+          show.se = T,
+        # rename variables
+          pred.labels = c("Intercept", "Chocolate", "Nuts", "Chocolate and Nuts"),
+          dv.labels = c("Win Percent", "Win Percent"), # wants it twice bc 2 models
+        # Rename predictors column
+          string.pred = "Variables",
+          string.se = "Std. Err."
+)
+
+```
+
+
+#### stargazer package
+
+Also produces multiple types of output: text, html
+
+```{r stargazer}
+
+p_load(stargazer)
+
+stargazer(reg_1, reg_2, type='text')
+
+```
+
+
+To get nice regression tables in an Rmarkdown file, include `results = 'asis'` in the brackets at the start of the chunk
+
+```{r stargazer 2, results='asis'}
+# include results='asis' in {}
+
+# type = html
+stargazer(reg_1, reg_2, type='html')
+
+```
+
+
+There are a lot of options for changing the table within the stargazer package.
+
+```{r stargazer 3, results='asis'}
+
+stargazer(reg_1, reg_2, type='html',
+          # add a title
+          title = "Candy Regressions",
+          
+          # label variables (covariates)
+          covariate.labels = c("Chocolate", "Nuts", "Chocolate and Nuts", "Intercept"),
+          
+          dep.var.labels = "Win Percent",
+          
+          # number of digits in each number
+          digits = 2,
+          
+          # choose which statistics to keep (n and r-squared)
+          keep.stat = c("n","rsq"),
+          
+          ci.level=0.90
+          )
+
+```
+
+
+
+
+Can also set type = 'latex' to get the table in latex. Speaking of which....
+
+```{r stargazer 4}
+
+stargazer(reg_1, reg_2, type='latex')
+
+```
+
+
+
+## Tables in LaTeX
+
+There may be cases in the future where you need a table for something unrelated to data, or it is showing qualitative information that can't be easily turned into a data frame and then into the table. Luckily, LaTeX has us covered! We can make all sorts of tables. Here's how the tables work:
+
+* Start by centering your table with $\backslash \text{begin \{ center \}}$ and at the end: $\backslash \text{end \{ center \}}$
+
+* Create the table: $\backslash \text{begin \{ tabular \} \{  \}}$
+
+    - In the second set of brackets, use a $c$ to denote an individual column, and a $|$ (pipe symbol?) to denote a vertical line in the table.
+
+* Use $\backslash \text{hline}$ to create a horizontal line 
+
+* Use ampersands $\&$ to *align* the lines of your columns
+
+* End each line with $\backslash \backslash$ to let it know that's the end of that line
+
+
+
+
+
+
