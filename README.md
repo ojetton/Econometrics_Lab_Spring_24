@@ -94,5 +94,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Lab 8 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8.Rmd)
 
+### [LaTeX Tables PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/latex_tables_lab_8.pdf)
 
+[LaTeX Tables TEX](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/latex_tables_lab_8.tex)
 
