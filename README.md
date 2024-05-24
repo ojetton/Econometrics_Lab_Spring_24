@@ -98,3 +98,8 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [LaTeX Tables TEX](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/latex_tables_lab_8.tex)
 
+### [In Class Rmd](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8_inclass.Rmd)
+
+### [In Class HTML](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8_inclass.html)
+
+

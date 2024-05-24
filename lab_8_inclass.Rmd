@@ -1,0 +1,112 @@
+---
+title: "lab 8 in class"
+author: "Owen Jetton"
+date: "2024-05-24"
+output: html_document
+---
+
+
+```{r 1}
+
+# download pacman, fivethirtyeight, tidyverse
+library(pacman)
+p_load(fivethirtyeight, tidyverse)
+
+
+age_data = congress_age %>% filter(congress == 113)
+
+
+table(age_data$party, age_data$chamber)
+```
+
+
+```{r 2}
+
+p_load(gt)
+
+age_table = age_data %>%
+  group_by(chamber, party) %>%
+  summarize(average_age = mean(age)) %>%
+  pivot_wider(
+    names_from = chamber,
+    values_from = average_age
+  )
+
+age_table %>% gt() %>%
+  tab_header(
+    title = "Average Age in Congress by Party and Chamber",
+    subtitle = "In the 113th Congress"
+  ) %>%
+  cols_label(party = "Party", house = "House", senate = "Senate") %>%
+  text_case_match("D" ~ "Democrat",
+                  "R" ~ "Republican",
+                  "I" ~ "Independent") %>%
+  fmt_number(decimals = 2)
+
+```
+
+
+
+```{r 3}
+
+candy = candy_rankings
+
+reg_1 = lm(data = candy, formula = winpercent ~ chocolate + peanutyalmondy)
+
+reg_2 = lm(data = candy, 
+           formula = winpercent ~ chocolate + peanutyalmondy + chocolate:peanutyalmondy)
+
+
+# sjPlot package
+p_load(sjPlot)
+
+tab_model(reg_1, reg_2,
+          show.ci = F,
+          show.se = T,
+          pred.labels = c("Intercept", "Chocolate", "Nuts", "Chocolate and Nuts"),
+          dv.labels = c("Win Percent", "Win Percent"),
+          string.pred = "Variable",
+          string.se = "S.E.",
+          string.p = "P - Value")
+
+```
+
+
+
+```{r 4}
+
+p_load(stargazer)
+
+stargazer(reg_1, reg_2, type = "text")
+
+
+```
+
+
+```{r 5, results = 'asis'}
+
+stargazer(reg_1, reg_2, type = "html",
+          
+          title = "Candy Regressions",
+          
+          covariate.labels = c("Chocolate", "Nuts", "Chocolate and Nuts", "Intercept"),
+          
+          dep.var.labels = "Win Percent",
+          
+          digits = 2,
+          
+          keep.stat = c("n", "rsq"))
+
+
+
+```
+
+
+```{r 6}
+
+stargazer(reg_1, reg_2, type = "latex")
+
+
+```
+
+
