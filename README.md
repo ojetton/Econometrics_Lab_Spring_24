@@ -103,3 +103,16 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 ### [In Class HTML](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_8_inclass.html)
 
 
+
+## Week 9: Maps and Spatial Data
+
+
+### [Lab 9 PDF](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_9.pdf)
+
+[Lab 9 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_9.Rmd)
+
+### [Spatial Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/state_inflation_data)
+
+
+
+
