@@ -16,7 +16,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Lab 1 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1.Rmd)
 
-#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1_inclass.html)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_1_inclass.R)
 
 #### [Challenge 1](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/challenge_1.pdf)
 
@@ -31,7 +31,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 #### [Muddy data to clean](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/muddy_data)
 
-#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2_inclass.html)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_2_inclass.R)
 
 
 ## Week 3: Webscraping
@@ -40,7 +40,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Lab 3 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3.Rmd)
  
-#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3_inclass.html)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_3_inclass.R)
 
 
 ## Week 4: Data Visualization
@@ -54,7 +54,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 #### [Space Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/space_data)
 
-#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_4_inclass.html)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_4_inclass.R)
 
 
 ## Week 5: Random Numbers and Simulations
@@ -63,7 +63,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Lab 5 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5.Rmd)
 
-#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5_inclass.html)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_5_inclass.R)
 
 
 ## Week 6: Refining our Simulation Skills
@@ -82,7 +82,7 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 [Lab 7 RmD Code](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7.Rmd)
 
-#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7_inclass.html)
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_7_inclass.R)
 
 
 
@@ -113,6 +113,6 @@ Welcome to the GitHub page for the Core Econometrics Lab during the Spring term 
 
 ### [Spatial Data](https://raw.githubusercontent.com/ojetton/Econometrics_Lab_Spring_24/main/state_inflation_data)
 
-
+#### [In Class File](https://github.com/ojetton/Econometrics_Lab_Spring_24/blob/main/lab_9_inclass.R)
 
 
